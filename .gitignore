@@ -1,0 +1,14 @@
+.env
+*.zip
+*.ankiaddon
+*.mp3
+audio/
+__pycache__/
+*.bat
+*.cfg
+meta.json
+ttstest.py
+viet_audio.py
+viet_dict.code-workspace
+viet_to_eng.py
+Viet74K.txt
