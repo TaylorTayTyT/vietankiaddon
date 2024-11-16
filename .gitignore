@@ -3,7 +3,7 @@
 *.ankiaddon
 *.mp3
 audio/
-__pycache__/
+__pycache__
 *.bat
 *.cfg
 meta.json
