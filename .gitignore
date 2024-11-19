@@ -3,7 +3,8 @@
 *.ankiaddon
 *.mp3
 audio/
-__pycache__
+__pycache__/
+__pycache__/__init__.cpython-39.opt-2.pyc
 *.bat
 *.cfg
 meta.json

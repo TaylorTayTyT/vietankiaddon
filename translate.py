@@ -11,6 +11,12 @@ from base64 import decodebytes
 dotenv.load_dotenv()
 translations_file = os.path.join(file_dir, "translations.txt")
 
+"""
+README
+Translates text from Vietnamese to English using Google Translate for Anki. These are helper functions that
+will be used the main python file. 
+"""
+
 def find_translation(file_path, viet_word):
     with open(file_path, 'r', encoding='utf-8', errors="ignore") as file:
         for line in file:
@@ -24,6 +30,7 @@ def find_translation(file_path, viet_word):
 
 async def translate_text(input):
     print(os.listdir(file_dir))
+    input = input.strip().lower()
     find_trans = find_translation(translations_file, input)
     if(find_trans):
         print("translation in file already")
@@ -95,5 +102,3 @@ async def tts(input):
                 print(await response.text())
 
 # Run the async function
-#asyncio.run(translate_text("chưa"))
-#asyncio.run(tts("chao"))

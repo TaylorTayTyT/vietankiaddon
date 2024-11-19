@@ -18,7 +18,7 @@ import aiohttp
 dotenv.load_dotenv()
 from translate import translate_text, tts
 
-note_type_name = "Vietnamese"
+note_type_name = "Viet Anki AddOn"
 user_head, _ = os.path.split(file_dir)
 user_head, _ = os.path.split(user_head)
 
@@ -105,13 +105,12 @@ def on_add_cards_init(addcard):
                         english = [translation["translatedText"] for translation in english]
                         note.fields[1] = '\n'.join(english)
                     except Exception as e:
-                        #showInfo("Something went wrong\nYou might have to change the .env file")
                         print(e)
                         return False
                     
                     audio_file = f"{viet}.mp3"
                     audio_path = os.path.join(media, audio_file)
-                    local_audio_path = os.path.join(parent_dir, "addons21", "viet_dict", "audio", audio_file)
+                    local_audio_path = os.path.join(file_dir, "audio", audio_file)
                     media_output_file = os.path.join(media, audio_file)
 
                     if(not os.path.exists(media_output_file)):
@@ -124,16 +123,22 @@ def on_add_cards_init(addcard):
                             #showInfo("Something went wrong\nYou might have to change the .env file")
                             return False
                         try:
+                            print(local_audio_path, media_output_file)
                             os.rename(local_audio_path, media_output_file)
                             if(os.path.exists(local_audio_path)):
                                 print("removing")
                                 os.remove(local_audio_path)
+                            
+                            note.fields[3] = f'[sound:{audio_file}]'
                         except FileExistsError:
                             print("File already exists")
+                            note.fields[3] = f'[sound:{audio_file}]'
                         except Exception as e:
                             print("os.rename error")
                             print(e)
-                    note.fields[3] = f'[sound:{audio_file}]'
+                    else:
+                        note.fields[3] = f'[sound:{audio_file}]'
+                    
                 
                 def success(addcard):
                     addcard.editor.loadNote()
